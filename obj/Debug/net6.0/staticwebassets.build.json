@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "Hash": "b1/X5ce8D9HrCLykA05ZmvNI422oJSUqJ+XV9GBzslk=",
+  "Source": "CustomQABot",
+  "BasePath": "_content/CustomQABot",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "CustomQABot\\wwwroot",
+      "Source": "CustomQABot",
+      "ContentRoot": "D:\\CCharp\\Bot\\ITSEGPT\\wwwroot\\",
+      "BasePath": "_content/CustomQABot",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "D:\\CCharp\\Bot\\ITSEGPT\\wwwroot\\default.html",
+      "SourceId": "CustomQABot",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\CCharp\\Bot\\ITSEGPT\\wwwroot\\",
+      "BasePath": "_content/CustomQABot",
+      "RelativePath": "default.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\default.html"
+    }
+  ]
+}
