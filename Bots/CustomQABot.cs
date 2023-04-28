@@ -40,7 +40,7 @@ namespace Microsoft.BotBuilderSamples.Bots
                 throw new ArgumentException(string.Format(missingConfigError, "LanguageEndpointHostName"));
             }
 
-            // added by HG
+            // added by HG prueba
             _openai = configuration["OpenIA:CompletionEndpoint"];
             _openKey = configuration["OpenIA:APIKey"];
 
