@@ -69,3 +69,7 @@ D:\CCharp\Bot\ITSEGPT\obj\Debug\net6.0\refint\CustomQABot.dll
 D:\CCharp\Bot\ITSEGPT\obj\Debug\net6.0\CustomQABot.pdb
 D:\CCharp\Bot\ITSEGPT\obj\Debug\net6.0\CustomQABot.genruntimeconfig.cache
 D:\CCharp\Bot\ITSEGPT\obj\Debug\net6.0\ref\CustomQABot.dll
+D:\CCharp\Bot\ITSEGPT\bin\Debug\net6.0\Azure.AI.OpenAI.dll
+D:\CCharp\Bot\ITSEGPT\bin\Debug\net6.0\Azure.Core.dll
+D:\CCharp\Bot\ITSEGPT\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
+D:\CCharp\Bot\ITSEGPT\bin\Debug\net6.0\System.Memory.Data.dll

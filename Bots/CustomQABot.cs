@@ -13,6 +13,8 @@ using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
+using Azure;
+using Azure.AI.OpenAI;
 
 namespace Microsoft.BotBuilderSamples.Bots
 {
@@ -28,6 +30,8 @@ namespace Microsoft.BotBuilderSamples.Bots
         private readonly bool _displayPreciseAnswerOnly;
         private readonly string _openai;
         private readonly string _openKey;
+        private readonly string _openaiITSE;
+        private readonly string _openKeyITSE;
         public CustomQABot(IHttpClientFactory httpClientFactory, IConfiguration configuration, ILogger<CustomQABot> logger)
         {
             _logger = logger;
@@ -41,8 +45,10 @@ namespace Microsoft.BotBuilderSamples.Bots
             }
 
             // added by HG prueba
-            _openai = configuration["OpenIA:CompletionEndpoint"];
-            _openKey = configuration["OpenIA:APIKey"];
+            _openai = configuration["CompletionEndpoint"];
+            _openKey = configuration["APIKey"];
+            _openaiITSE = configuration["endpoint"];
+            _openKeyITSE = configuration["key"];
 
             _endpointKey = configuration["LanguageEndpointKey"];
             if (string.IsNullOrEmpty(_endpointKey))
@@ -89,20 +95,20 @@ namespace Microsoft.BotBuilderSamples.Bots
                 var preciseAnswerText = response[0].AnswerSpan?.Text;
                 if(response[0].Score<0.7 )//|| string.IsNullOrEmpty(preciseAnswerText))
                 {
-                    HttpClient client = new HttpClient();
-                    client.BaseAddress = new Uri(_openai);
-                    client.DefaultRequestHeaders.Accept.Clear();
-                    client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                    client.DefaultRequestHeaders.Add("Authorization", $"Bearer {_openKey}");
+                    // HttpClient client = new HttpClient();
+                    // client.BaseAddress = new Uri(_openai);
+                    // client.DefaultRequestHeaders.Accept.Clear();
+                    // client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                    // client.DefaultRequestHeaders.Add("Authorization", $"Bearer {_openKey}");
 
-                    HttpRequestMessage reques = new HttpRequestMessage(HttpMethod.Post, client.BaseAddress);
-                    var body = $"{{\"model\":\"text-davinci-003\",\"prompt\":\"{turnContext.Activity.Text}\",\"temperature\":1,\"max_tokens\":2048}}";
-                    var content = new StringContent(body,System.Text.Encoding.UTF8,"application/json");
-                    reques.Content = content;
+                    // HttpRequestMessage reques = new HttpRequestMessage(HttpMethod.Post, client.BaseAddress);
+                    // var body = $"{{\"model\":\"text-davinci-003\",\"prompt\":\"{turnContext.Activity.Text}\",\"temperature\":1,\"max_tokens\":2048}}";
+                    // var content = new StringContent(body,System.Text.Encoding.UTF8,"application/json");
+                    // reques.Content = content;
 
                     try
                     {
-                        var airesponse = await client.SendAsync(reques).ConfigureAwait(false);
+                        /*var airesponse = await client.SendAsync(reques).ConfigureAwait(false);
                         airesponse.EnsureSuccessStatusCode();
                         string responseString = await airesponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                         JObject jsonObject = JObject.Parse(responseString);
@@ -115,8 +121,22 @@ namespace Microsoft.BotBuilderSamples.Bots
                                 // Add answer to the reply when it is configured.
                                 activities.Add(answer);
                             }
-                        }
-                        
+                        }*/
+                        string endpoint = _openaiITSE;
+                        string key = _openKeyITSE;
+
+                        // Enter the deployment name you chose when you deployed the model.
+                        string engine = "text-davinci-003";
+
+                        OpenAIClient client = new(new Uri(endpoint), new AzureKeyCredential(key));
+                        string prompt = turnContext.Activity.Text;
+                        Response<Completions> response1 = await client.GetCompletionsAsync(engine, prompt);
+                        Response<Completions> completionsResponse = response1;
+                        string completion = completionsResponse.Value.Choices[0].Text;
+                        answer = MessageFactory.Text((string)completion,(string)completion);
+                        activities.Add(answer);
+
+                      
 
                     }
                     catch{
