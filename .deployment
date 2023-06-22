@@ -1,2 +1,2 @@
 [config]
-SCM_SCRIPT_GENERATOR_ARGS=--aspNetCore "CustomQABot.csproj"
+SCM_SCRIPT_GENERATOR_ARGS=--aspNetCore "ITSUS0.csproj"
