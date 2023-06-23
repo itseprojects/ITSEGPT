@@ -1155,12 +1155,6 @@
     "flow": {
       "body": "=action.hostname",
       "widget": "ActionCard"
-    },
-    "menu": {
-      "label": "Connect to QnA Knowledgebase",
-      "submenu": [
-        "Access external resources"
-      ]
     }
   },
   "Microsoft.RegexRecognizer": {
