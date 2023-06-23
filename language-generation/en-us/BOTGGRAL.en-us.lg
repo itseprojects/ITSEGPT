@@ -45,11 +45,14 @@
 
 # SendActivity_B48XOE()
 [Activity
+    Text = ${SendActivity_B48XOE_text()}
     Attachments = ${SendActivity_B48XOE_attachment_8Glso8()}
 ]
 
 # SendActivity_B48XOE_attachment_8Glso8()
 [HeroCard
-text = ${expandText(@answer)}
+title = Opciones disponibles
 buttons= ${foreach(turn.recognized.answers[0].context.prompts, x, x.displayText)}
 ]
+# SendActivity_B48XOE_text()
+- ${expandText(@answer)}
